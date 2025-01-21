@@ -4,12 +4,19 @@
 
 
 
-float side(float x1, float x2, float y1, float y2){
-	return sqrt(pow((x2-x1),2) + pow((y2-y1),2));
+float side(float x1, float y1, float x2, float y2){
+	return sqrt(pow((x2 - x1),2) + pow((y2 - y1),2));
+}
+
+double angle(float side1, float side2, float side3){
+	return (acos((pow(side1,2) + pow(side2,2) -pow(side3,2)) / (2 * side1 * side2)) * (180.0 / M_PI));
+	
 }
 
 int main(){
-	float ax, ay, bx, by, cx, cy, ab, bc, ac;
+	float ax, ay, bx, by, cx, cy;
+	float ab, bc, ac;
+	float a_angle, b_angle, c_angle;
 	printf("Enter the coordinates of the points.\n");
 	printf("Point A: ");
 	scanf("%f %f", &ax, &ay);
@@ -18,11 +25,18 @@ int main(){
 	printf("Point C: ");
 	scanf("%f %f", &cx, &cy);
 	
-	ab=side(ax, ay, bx, by);
-	bc=side(cx, cy, bx, by);
-	ac=side(ax, ay, cx, cy);
+	ab = side(ax, ay, bx, by);
+	bc = side(bx, by, cx, cy);
+	ac = side(ax, ay, cx, cy);
 	
-	printf("Sides %f %f %f", ab, bc, ac);
+	a_angle = angle(ab, ac, bc);
+	b_angle = angle(ab, bc, ac);
+	c_angle = angle(bc, ac, ab);
+	
+	
+	
+	printf("Sides: %f %f %f \n", ab, bc, ac);
+	printf("Angles: %lf %lf %lf \n", a_angle, b_angle, c_angle);
 	
 	
 	return 0;
