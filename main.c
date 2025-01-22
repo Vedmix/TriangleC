@@ -16,7 +16,7 @@ double angle(float side1, float side2, float side3){
 int main(){
 	float ax, ay, bx, by, cx, cy;
 	float ab, bc, ac;
-	float a_angle, b_angle, c_angle;
+	double a_angle, b_angle, c_angle;
 	printf("Enter the coordinates of the points.\n");
 	printf("Point A: ");
 	scanf("%f %f", &ax, &ay);
@@ -26,10 +26,11 @@ int main(){
 	scanf("%f %f", &cx, &cy);
 	
 	if ((ax == bx & ay == by) | (ax == cx & ay == cy) | (cx == bx & cy == by)){
-		printf("Triangle is not exist!");
+		printf("Triangle is not exist!\n");
 		return 0;
 	}
 	else{
+	
 	ab = side(ax, ay, bx, by);
 	bc = side(bx, by, cx, cy);
 	ac = side(ax, ay, cx, cy);
@@ -38,10 +39,48 @@ int main(){
 	b_angle = angle(ab, bc, ac);
 	c_angle = angle(bc, ac, ab);
 	
+	double epsilon = 1e-9;
 	
+	
+	if (((ab + bc) > ac) && ((ac + bc) > ab) && ((ab + ac) > bc)){
+	
+		if (ab == bc == ac){
+			printf("Type: Equilateral triangle\n");
+		}
+		else if ((a_angle == 90.0) || (b_angle == 90.0) || (c_angle == 90.0)){
+			if ((ab != bc && bc == ac) || (ab == bc && bc != ac) || (ab == ac && ac != bc)){
+				printf("Type: Rectangular triangle with two equal sides\n");
+			}
+			else{
+				printf("Type: Rectangular triangle\n");
+			}
+		}
+		else if ((a_angle < 90.0) && (b_angle < 90.0) && (c_angle < 90.0)){
+			if ((ab != bc && bc == ac) || (ab == bc && bc != ac) || (ab == ac && ac != bc)){
+				printf("Type: Acute triangle with two equal sides\n");
+			}
+			else{
+				printf("Type: Acute triangle\n");
+			}
+		}
+		else if ((a_angle > 90.0) || (b_angle > 90.0) || (c_angle > 90.0)){
+			if ((ab != bc && bc == ac) || (ab == bc && bc != ac) || (ab == ac && ac != bc)){
+				printf("Type: Obtuse triangle with two equal sides\n");
+			}
+			else{
+				printf("Type: Obtuse triangle\n");
+			}
+		}	
+	}
+	else{
+		printf("Triangle is not exist!\n");
+		return 0;
+	}
+
 	
 	printf("Sides: %f %f %f \n", ab, bc, ac);
-	printf("Angles: %lf %lf %lf \n", a_angle, b_angle, c_angle);
+	printf("Angles: %lf %lf %lf \n", a_angle, b_angle , c_angle);
+	
 	}
 	
 	return 0;
