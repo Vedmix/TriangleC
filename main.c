@@ -25,6 +25,11 @@ int main(){
 	printf("Point C: ");
 	scanf("%f %f", &cx, &cy);
 	
+	if ((ax == bx & ay == by) | (ax == cx & ay == cy) | (cx == bx & cy == by)){
+		printf("Triangle is not exist!");
+		return 0;
+	}
+	else{
 	ab = side(ax, ay, bx, by);
 	bc = side(bx, by, cx, cy);
 	ac = side(ax, ay, cx, cy);
@@ -37,7 +42,7 @@ int main(){
 	
 	printf("Sides: %f %f %f \n", ab, bc, ac);
 	printf("Angles: %lf %lf %lf \n", a_angle, b_angle, c_angle);
-	
+	}
 	
 	return 0;
 }
