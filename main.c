@@ -90,10 +90,18 @@ int main(){
 	p = ab + bc + ac;
 	s = sqrt((p / 2) * ((p / 2) - ab) * ((p / 2) - bc) * ((p / 2) - ac));
 	
-	printf("Sides: %f %f %f \n", ab, bc, ac);
-	printf("Angles: %f %f %f \n", a_angle, b_angle , c_angle);
-	printf("Perimeter: %f\n", p);
-	printf("Square: %f\n", s);
+	printf("\n");
+	printf("Sides:  AB = %f cm\n", ab);
+	printf("        BC = %f cm\n", bc);
+	printf("        AC = %f cm\n", ac);
+	printf("\n");
+	printf("Angles: BAC = %f °\n", a_angle);
+	printf("        ABC = %f °\n", b_angle);
+	printf("        BCA = %f °\n", c_angle);
+	printf("\n");
+	printf("Perimeter: %f cm\n", p);
+	printf("\n");
+	printf("Square:    %f cm\n", s);
 	
 	}
 	
