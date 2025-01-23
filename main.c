@@ -38,6 +38,29 @@ void equationYKB(float x1, float y1, float x2, float y2) {
     }
 }
 
+void equationABC(float x1, float y1, float x2, float y2) {
+	float a = y2 - y1;
+	float b = x1 - x2;
+	float c = x2 * y1 - x1 * y2;
+	if (b == 0 && c == 0){
+		printf("(%.2f)x = 0\n", a);
+	} else if (a == 0 && c == 0){
+		printf("(%.2f)y = 0\n", b);
+	} else if (a == 0){
+		printf("(%.2f)y + (%.2f) = 0\n", b, c);
+	} else if (b == 0){
+		printf("(%.2f)x + (%.2f) = 0\n", a, c);
+	} else if (c == 0){
+		printf("(%.2f)x + (%.2f)y = 0\n", a, b);
+	} else{
+		printf("(%.2f)x + (%.2f)y + (%.2f) = 0\n", a, b, c);
+	}
+	
+	
+
+
+
+}
 int main(){
 	float ax, ay, bx, by, cx, cy;
 	float ab, bc, ac;
@@ -140,7 +163,16 @@ int main(){
 	printf("BC: ");
 	equationYKB(bx, by, cx, cy);
 	printf("AC: ");
-	equationYKB(ax, ay, cx, cy);	
+	equationYKB(ax, ay, cx, cy);
+	printf("\n");
+	printf("Equations for lines: \n");
+	printf("\n");
+	printf("AB: ");
+	equationABC(ax, ay, bx, by);
+	printf("BC: ");
+	equationABC(bx, by, cx, cy);
+	printf("AC: ");
+	equationABC(ax, ay, cx, cy);	
 	printf("\n");
 	printf("Perimeter: %f \n", p);
 	printf("\n");
