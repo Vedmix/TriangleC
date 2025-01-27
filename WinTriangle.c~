@@ -1,50 +1,41 @@
+
+
 #include <GL/glut.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 float ax, ay, bx, by, cx, cy;
-float gridStep;
-int WinW = 800, WinH = 800;
+int WinW = 800,
+    WinH = 800;
+void points(){
+    glColor3f(0.0, 0.0, 0.0);
 
-void drawGrid(float step) {
-    glColor3f(0.8, 0.8, 0.8); 
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(ax / 5, ay / 5);
+        glVertex2f(bx / 5, by / 5);
+        glVertex2f(cx / 5, cy / 5);
+    glEnd();
+}
+
+void grid(){
+    glColor3f(0.8, 0.8, 0.8);
+
     for (float i = -WinW / 2; i <= WinW / 2; i += step) {
         glBegin(GL_LINES);
-        glVertex2f(i, -WinH / 2);
-        glVertex2f(i, WinH / 2);
+            glVertex2f(i, -WinH / 2);
+            glVertex2f(i, WinH / 2);
         glEnd();
 
         glBegin(GL_LINES);
-        glVertex2f(-WinW / 2, i);
-        glVertex2f(WinW / 2, i);
+            glVertex2f(-WinW / 2, i);
+            glVertex2f(WinW / 2, i);
         glEnd();
     }
 }
-
-void drawAxes() {
-    glColor3f(0.0, 0.0, 0.0); 
-    glBegin(GL_LINES);
-        glVertex2f(-WinW / 2, 0);
-        glVertex2f(WinW / 2, 0);
-        glVertex2f(0, -WinH / 2);
-        glVertex2f(0, WinH / 2);
-    glEnd();
-}
-
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
-
-    drawGrid(gridStep); 
-    drawAxes();        
-
-    glColor3f(1.0, 0.0, 0.0);
-    
-    glBegin(GL_LINE_LOOP);
-        glVertex2f(ax, ay); 
-        glVertex2f(bx, by); 
-        glVertex2f(cx, cy); 
-    glEnd();
-
+        grid();
+        points();
     glFlush();
 }
 
@@ -57,27 +48,18 @@ int main(int argc, char *argv[]) {
     cx = atof(argv[5]);
     cy = atof(argv[6]);
 
-    
-    if (ax <= 10.0 && ay <= 10.0 && bx <= 10.0 && by <= 10.0 && cx <= 10.0 && cy <= 10.0) {
-        gridStep = 1.0; 
-    } else if (ax < 100.0 && ay < 100.0 && bx < 100.0 && by < 100.0 && cx < 100.0 && cy < 100.0) {
-        gridStep = 10.0; 
-    } else if (ax < 1000.0 && ay < 1000.0 && bx < 1000.0 && by < 1000.0 && cx < 1000.0 && cy < 1000.0) {
-        gridStep = 100.0; 
-    } 
-    
-
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(WinW, WinH);
     glutInitWindowPosition(200, 200);
-    glutCreateWindow("Triangle with Grid and Axes");
+    glutCreateWindow("Triangle");
     glClearColor(1, 1, 1, 1.0);
 
-    float maxCoordX = (ax > bx) ? ax : bx;
-    float maxCoordY = (ay > by) ? ay : by;
-    if (cx > maxCoordX) maxCoordX = cx;
-    if (cy > maxCoordY) maxCoordY = cy;
+    glOrtho(-WinW / 2, WinW / 2, WinH / 2, -WinH / 2, 0, 0);
 
-    // Устанавливаем область видимости
-    float offset = 10.0; // Свободное пространство по краям
+    glutDisplayFunc(display);
+
+    glutMainLoop();
+
+    return 0;
+}

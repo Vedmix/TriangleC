@@ -1,23 +1,52 @@
 
+
 #include <GL/glut.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 float ax, ay, bx, by, cx, cy;
-int WinW = 800,
-    WinH = 800;
+int WinW = 1000,
+    WinH = 1000;
+void points(){
+    glColor3f(1.0, 0.0, 0.0);
+
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(ax * 10, ay * 10);
+        glVertex2f(bx * 10, by * 10);
+        glVertex2f(cx * 10, cy * 10);
+    glEnd();
+}
+
+void grid(){
+    glColor3f(0.8, 0.8, 0.8);
+
+    glBegin(GL_LINES);
+    for (float i = -WinW / 2; i <= WinW / 2; i += 10) {
+
+            glVertex2f(i, -WinH / 2);
+            glVertex2f(i, WinH / 2);
+
+            glVertex2f(-WinW / 2, i);
+            glVertex2f(WinW / 2, i);
+    }
+    glEnd();
+}
+
+void axes(){
+    glColor3f(0.7, 0.7, 0.7);
+    glBegin(GL_LINES);
+        glVertex2f(-WinW / 2, 0);
+        glVertex2f(WinW / 2, 0);
+        glVertex2f(0, -WinH / 2);
+        glVertex2f(0, WinH / 2);
+    glEnd();
+}
 
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
-
-    glColor3f(0.0, 0.0, 0.0);
-
-    glBegin(GL_LINE_LOOP);
-        glVertex2f(ax / 5, ay / 5); 
-        glVertex2f(bx / 5, by / 5); 
-        glVertex2f(cx / 5, cy / 5); 
-    glEnd();
-
+        grid();
+        axes();
+        points();
     glFlush();
 }
 
@@ -37,7 +66,8 @@ int main(int argc, char *argv[]) {
     glutCreateWindow("Triangle");
     glClearColor(1, 1, 1, 1.0);
 
-    glOrtho(-WinW / 2, WinW / 2, WinH / 2, -WinH / 2, 0, 0);
+    glOrtho(-WinW / 2, WinW / 2, -WinH / 2, WinH / 2, -1, 1);
+
 
     glutDisplayFunc(display);
 
