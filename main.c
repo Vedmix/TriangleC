@@ -181,6 +181,8 @@ int main(){
 	
 	}
 	
-	system("./win");
+	char command[100];
+	sprintf(command, "./win %f %f %f %f %f %f", ax, ay, bx, by, cx, cy); 
+	system(command);
 	return 0;
 }
