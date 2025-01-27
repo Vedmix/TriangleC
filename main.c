@@ -181,5 +181,6 @@ int main(){
 	
 	}
 	
+	system("./win");
 	return 0;
 }
