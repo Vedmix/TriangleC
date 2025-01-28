@@ -1,5 +1,3 @@
-
-
 #include <GL/glut.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,7 +5,10 @@
 float ax, ay, bx, by, cx, cy;
 int WinW = 1000,
     WinH = 1000;
-void points(){
+
+float scale = 1.0;
+
+void points() {
     glColor3f(1.0, 0.0, 0.0);
 
     glBegin(GL_LINE_LOOP);
@@ -17,22 +18,20 @@ void points(){
     glEnd();
 }
 
-void grid(){
+void grid() {
     glColor3f(0.8, 0.8, 0.8);
 
     glBegin(GL_LINES);
     for (float i = -WinW / 2; i <= WinW / 2; i += 10) {
-
-            glVertex2f(i, -WinH / 2);
-            glVertex2f(i, WinH / 2);
-
-            glVertex2f(-WinW / 2, i);
-            glVertex2f(WinW / 2, i);
+        glVertex2f(i, -WinH / 2);
+        glVertex2f(i, WinH / 2);
+        glVertex2f(-WinW / 2, i);
+        glVertex2f(WinW / 2, i);
     }
     glEnd();
 }
 
-void axes(){
+void axes() {
     glColor3f(0.7, 0.7, 0.7);
     glBegin(GL_LINES);
         glVertex2f(-WinW / 2, 0);
@@ -44,14 +43,34 @@ void axes(){
 
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
-        grid();
-        axes();
-        points();
+
+    glPushMatrix();
+    glScalef(scale, scale, 1);
+
+    grid();
+    axes();
+    points();
+
+    glPopMatrix();
     glFlush();
 }
 
-int main(int argc, char *argv[]) {
+void keyboard(unsigned char key, int x, int y) {
+    switch (key) {
+        case '+':
+            scale *= 1.1;
+            break;
+        case '-':
+            scale /= 1.1;
+            break;
+        case 27:
+            exit(0);
+            break;
+    }
+    glutPostRedisplay();
+}
 
+int main(int argc, char *argv[]) {
     ax = atof(argv[1]);
     ay = atof(argv[2]);
     bx = atof(argv[3]);
@@ -68,8 +87,8 @@ int main(int argc, char *argv[]) {
 
     glOrtho(-WinW / 2, WinW / 2, -WinH / 2, WinH / 2, -1, 1);
 
-
     glutDisplayFunc(display);
+    glutKeyboardFunc(keyboard);
 
     glutMainLoop();
 
