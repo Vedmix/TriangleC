@@ -9,9 +9,23 @@ int WinW = 1000,
 float scale = 1.0;
 
 void points() {
-    glColor3f(1.0, 0.0, 0.0);
+    glColor3f(0, 1, 0);
+
+
+    glLineWidth(3.0f);
 
     glBegin(GL_LINE_LOOP);
+
+        glVertex2f(ax * 10, ay * 10);
+        glVertex2f(bx * 10, by * 10);
+        glVertex2f(cx * 10, cy * 10);
+    glEnd();
+
+    glColor3f(1, 0, 1);
+
+    glPointSize(5.0f);
+
+    glBegin(GL_POINTS);
         glVertex2f(ax * 10, ay * 10);
         glVertex2f(bx * 10, by * 10);
         glVertex2f(cx * 10, cy * 10);
@@ -20,6 +34,8 @@ void points() {
 
 void grid() {
     glColor3f(0.8, 0.8, 0.8);
+
+    glLineWidth(1.0f);
 
     glBegin(GL_LINES);
     for (float i = -WinW / 2; i <= WinW / 2; i += 10) {
@@ -33,6 +49,9 @@ void grid() {
 
 void axes() {
     glColor3f(0.7, 0.7, 0.7);
+
+    glLineWidth(1.0f);
+
     glBegin(GL_LINES);
         glVertex2f(-WinW / 2, 0);
         glVertex2f(WinW / 2, 0);
@@ -57,7 +76,7 @@ void display() {
 
 void keyboard(unsigned char key, int x, int y) {
     switch (key) {
-        case '+':
+        case '=':
             scale *= 1.1;
             break;
         case '-':
