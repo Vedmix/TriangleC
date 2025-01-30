@@ -11,7 +11,7 @@ float side(float x1, float y1, float x2, float y2){
 
 float angle(float side1, float side2, float side3){
 	return (acos((pow(side1,2) + pow(side2,2) - pow(side3,2)) / (2 * side1 * side2)) * (180.0 / M_PI));
-	
+
 }
 
 float median(float side1, float side2, float side3) {
@@ -56,8 +56,8 @@ void equationABC(float x1, float y1, float x2, float y2) {
 	} else{
 		printf("(%.2f)x + (%.2f)y + (%.2f) = 0\n", a, b, c);
 	}
-	
-	
+
+
 
 
 
@@ -68,7 +68,7 @@ int main(){
 	float a_angle, b_angle, c_angle;
 	float aa1, bb1, cc1;
 	float p, s, h;
-	
+
 	printf("Enter the coordinates of the points.\n");
 	printf("\n");
 	printf("Point A: ");
@@ -78,111 +78,114 @@ int main(){
 	printf("Point C: ");
 	scanf("%f %f", &cx, &cy);
 	printf("\n");
-	
+
 	if ((ax == bx & ay == by) | (ax == cx & ay == cy) | (cx == bx & cy == by)){
 		printf("Triangle is not exist!\n");
 		return 0;
 	}
 	else{
-	
+
 	ab = side(ax, ay, bx, by);
 	bc = side(bx, by, cx, cy);
 	ac = side(ax, ay, cx, cy);
-	
+
 	a_angle = angle(ab, ac, bc);
 	b_angle = angle(ab, bc, ac);
 	c_angle = angle(bc, ac, ab);
-	
-	aa1 = median(ac, bc, ab); 
+
+	aa1 = median(ac, bc, ab);
     bb1 = median(ab, bc, ac);
-    cc1 = median(ab, ac, bc); 
-	
+    cc1 = median(ab, ac, bc);
+
 	if (((ab + bc) > ac) && ((ac + bc) > ab) && ((ab + ac) > bc)){
-	
+
 		if (ab == bc == ac){
 			printf("Type: Equilateral triangle\n");
 		}
-		
+
 		else if ((a_angle == 90.0) || (b_angle == 90.0) || (c_angle == 90.0)){
-		
+
 			if ((ab != bc && bc == ac) || (ab == bc && bc != ac) || (ab == ac && ac != bc)){
 				printf("Type: Rectangular triangle with two equal sides\n");
 			}
-			
+
 			else{
 				printf("Type: Rectangular triangle\n");
 			}
 		}
-		
+
 		else if ((a_angle < 90.0) && (b_angle < 90.0) && (c_angle < 90.0)){
-		
+
 			if ((ab != bc && bc == ac) || (ab == bc && bc != ac) || (ab == ac && ac != bc)){
 				printf("Type: Acute triangle with two equal sides\n");
 			}
-			
+
 			else{
 				printf("Type: Acute triangle\n");
 			}
 		}
-		
+
 		else if ((a_angle > 90.0) || (b_angle > 90.0) || (c_angle > 90.0)){
-		
+
 			if ((ab != bc && bc == ac) || (ab == bc && bc != ac) || (ab == ac && ac != bc)){
 				printf("Type: Obtuse triangle with two equal sides\n");
 			}
-			
+
 			else{
 				printf("Type: Obtuse triangle\n");
 			}
-		}	
+		}
 	}
-	
+
 	else{
 		printf("Triangle is not exist!\n");
 		return 0;
 	}
 	p = ab + bc + ac;
 	s = sqrt((p / 2) * ((p / 2) - ab) * ((p / 2) - bc) * ((p / 2) - ac));
-	
+
 	printf("\n");
-	printf("Sides:   AB = %f \n", ab);
+	printf("Sides:\n");
+    printf("         AB = %f \n", ab);
 	printf("         BC = %f \n", bc);
 	printf("         AC = %f \n", ac);
 	printf("\n");
-	printf("Angles:  BAC = %f \n", a_angle);
+	printf("Angles:\n");
+    printf("         BAC = %f \n", a_angle);
 	printf("         ABC = %f \n", b_angle);
 	printf("         BCA = %f \n", c_angle);
 	printf("\n");
-	printf("Medians: AA1 = %f \n", aa1);
+	printf("Medians:\n");
+    printf("         AA1 = %f \n", aa1);
 	printf("         BB1 = %f \n", bb1);
-	printf("         CC1 = %f \n", cc1);
+	printf("         /CC1 = %f \n", cc1);
 	printf("\n");
 	printf("Equations for edges: \n");
 	printf("\n");
-	printf("AB: ");
+	printf("         AB: ");
 	equationYKB(ax, ay, bx, by);
-	printf("BC: ");
+	printf("         BC: ");
 	equationYKB(bx, by, cx, cy);
-	printf("AC: ");
+	printf("         AC: ");
 	equationYKB(ax, ay, cx, cy);
 	printf("\n");
 	printf("Equations for lines: \n");
 	printf("\n");
-	printf("AB: ");
+	printf("         AB: ");
 	equationABC(ax, ay, bx, by);
-	printf("BC: ");
+	printf("         BC: ");
 	equationABC(bx, by, cx, cy);
-	printf("AC: ");
-	equationABC(ax, ay, cx, cy);	
+	printf("         AC: ");
+	equationABC(ax, ay, cx, cy);
 	printf("\n");
 	printf("Perimeter: %f \n", p);
 	printf("\n");
 	printf("Square:    %f \n", s);
-	
+
 	}
-	
+
 	char command[100];
-	sprintf(command, "./win %f %f %f %f %f %f", ax, ay, bx, by, cx, cy); 
+	sprintf(command, "./win %f %f %f %f %f %f", ax, ay, bx, by, cx, cy);
 	system(command);
 	return 0;
 }
