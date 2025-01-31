@@ -7,22 +7,22 @@ int WinW = 1000,
     WinH = 1000;
 
 float scale = 1.0;
+float speed = 20;
+
+
+float posX = 0.0, posY = 0.0;
 
 void points() {
     glColor3f(0, 1, 0);
-
-
     glLineWidth(3.0f);
 
     glBegin(GL_LINE_LOOP);
-
         glVertex2f(ax * 10, ay * 10);
         glVertex2f(bx * 10, by * 10);
         glVertex2f(cx * 10, cy * 10);
     glEnd();
 
     glColor3f(1, 0, 1);
-
     glPointSize(5.0f);
 
     glBegin(GL_POINTS);
@@ -34,9 +34,7 @@ void points() {
 
 void grid() {
     glColor3f(0.8, 0.8, 0.8);
-
     glLineWidth(1.0f);
-
     glBegin(GL_LINES);
     for (float i = -WinW / 2; i <= WinW / 2; i += 10) {
         glVertex2f(i, -WinH / 2);
@@ -49,9 +47,7 @@ void grid() {
 
 void axes() {
     glColor3f(0.7, 0.7, 0.7);
-
     glLineWidth(1.0f);
-
     glBegin(GL_LINES);
         glVertex2f(-WinW / 2, 0);
         glVertex2f(WinW / 2, 0);
@@ -62,10 +58,11 @@ void axes() {
 
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
-
     glPushMatrix();
-    glScalef(scale, scale, 1);
 
+    glTranslatef(posX, posY, 0);
+
+    glScalef(scale, scale, 1);
     grid();
     axes();
     points();
@@ -81,6 +78,18 @@ void keyboard(unsigned char key, int x, int y) {
             break;
         case '-':
             scale /= 1.1;
+            break;
+        case 'w':
+            posY -= speed;
+            break;
+        case 's':
+            posY += speed;
+            break;
+        case 'a':
+            posX += speed;
+            break;
+        case 'd':
+            posX -= speed;
             break;
         case 27:
             exit(0);
@@ -103,13 +112,11 @@ int main(int argc, char *argv[]) {
     glutInitWindowPosition(200, 200);
     glutCreateWindow("Triangle");
     glClearColor(1, 1, 1, 1.0);
-
     glOrtho(-WinW / 2, WinW / 2, -WinH / 2, WinH / 2, -1, 1);
 
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
 
     glutMainLoop();
-
     return 0;
 }

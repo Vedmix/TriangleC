@@ -158,7 +158,7 @@ int main(){
 	printf("Medians:\n");
     printf("         AA1 = %f \n", aa1);
 	printf("         BB1 = %f \n", bb1);
-	printf("         /CC1 = %f \n", cc1);
+	printf("         CC1 = %f \n", cc1);
 	printf("\n");
 	printf("Equations for edges: \n");
 	printf("\n");
@@ -189,3 +189,16 @@ int main(){
 	system(command);
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
