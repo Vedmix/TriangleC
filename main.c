@@ -5,56 +5,56 @@
 
 
 
-float side(float x1, float y1, float x2, float y2){
+double side(double x1, double y1, double x2, double y2){
 	return sqrt(pow((x2 - x1),2) + pow((y2 - y1),2));
 }
 
-float angle(float side1, float side2, float side3){
+double angle(double side1, double side2, double side3){
 	return (acos((pow(side1,2) + pow(side2,2) - pow(side3,2)) / (2 * side1 * side2)) * (180.0 / M_PI));
 
 }
 
-float median(float side1, float side2, float side3) {
+double median(double side1, double side2, double side3) {
     return (1.0 / 2.0) * sqrt(2 * pow(side1, 2) + 2 * pow(side2, 2) - pow(side3, 2));
 }
 
-void equationYKB(float x1, float y1, float x2, float y2) {
+void equationYKB(double x1, double y1, double x2, double y2) {
     if (x2 == x1) {
-        printf("x = %.2f\n", x1);
+        printf("x = %.2lf\n", x1);
         return;
     } else if (y2 == y1) {
-        printf("y = %.2f\n", y1);
+        printf("y = %.2lf\n", y1);
         return;
     }
 
-    float k = (y2 - y1) / (x2 - x1);
-    float b = y1 - k * x1;
+    double k = (y2 - y1) / (x2 - x1);
+    double b = y1 - k * x1;
 
     if (b < 0.0) {
-        printf("y = %.2fx + (%.2f)\n", k, b);
+        printf("y = %.2lfx + (%.2lf)\n", k, b);
     } else if (b == 0.0) {
-        printf("y = %.2fx\n", k);
+        printf("y = %.2lfx\n", k);
     } else {
-        printf("y = %.2fx + %.2f\n", k, b);
+        printf("y = %.2lfx + %.2lf\n", k, b);
     }
 }
 
-void equationABC(float x1, float y1, float x2, float y2) {
-	float a = y2 - y1;
-	float b = x1 - x2;
-	float c = x2 * y1 - x1 * y2;
+void equationABC(double x1, double y1, double x2, double y2) {
+	double a = y2 - y1;
+	double b = x1 - x2;
+	double c = x2 * y1 - x1 * y2;
 	if (b == 0 && c == 0){
-		printf("(%.2f)x = 0\n", a);
+		printf("(%.2lf)x = 0\n", a);
 	} else if (a == 0 && c == 0){
-		printf("(%.2f)y = 0\n", b);
+		printf("(%.2lf)y = 0\n", b);
 	} else if (a == 0){
-		printf("(%.2f)y + (%.2f) = 0\n", b, c);
+		printf("(%.2lf)y + (%.2lf) = 0\n", b, c);
 	} else if (b == 0){
-		printf("(%.2f)x + (%.2f) = 0\n", a, c);
+		printf("(%.2lf)x + (%.2lf) = 0\n", a, c);
 	} else if (c == 0){
-		printf("(%.2f)x + (%.2f)y = 0\n", a, b);
+		printf("(%.2lf)x + (%.2lf)y = 0\n", a, b);
 	} else{
-		printf("(%.2f)x + (%.2f)y + (%.2f) = 0\n", a, b, c);
+		printf("(%.2lf)x + (%.2lf)y + (%.2lf) = 0\n", a, b, c);
 	}
 
 
@@ -63,20 +63,20 @@ void equationABC(float x1, float y1, float x2, float y2) {
 
 }
 int main(){
-	float ax, ay, bx, by, cx, cy;
-	float ab, bc, ac;
-	float a_angle, b_angle, c_angle;
-	float aa1, bb1, cc1;
-	float p, s, h;
+	double ax, ay, bx, by, cx, cy;
+	double ab, bc, ac;
+	double a_angle, b_angle, c_angle;
+	double aa1, bb1, cc1;
+	double p, s, h;
 
 	printf("Enter the coordinates of the points.\n");
 	printf("\n");
 	printf("Point A: ");
-	scanf("%f %f", &ax, &ay);
+	scanf("%lf %lf", &ax, &ay);
 	printf("Point B: ");
-	scanf("%f %f", &bx, &by);
+	scanf("%lf %lf", &bx, &by);
 	printf("Point C: ");
-	scanf("%f %f", &cx, &cy);
+	scanf("%lf %lf", &cx, &cy);
 	printf("\n");
 
 	if ((ax == bx & ay == by) | (ax == cx & ay == cy) | (cx == bx & cy == by)){
@@ -146,19 +146,19 @@ int main(){
 
 	printf("\n");
 	printf("Sides:\n");
-    printf("         AB = %f \n", ab);
-	printf("         BC = %f \n", bc);
-	printf("         AC = %f \n", ac);
+    printf("         AB = %lf \n", ab);
+	printf("         BC = %lf \n", bc);
+	printf("         AC = %lf \n", ac);
 	printf("\n");
 	printf("Angles:\n");
-    printf("         BAC = %f \n", a_angle);
-	printf("         ABC = %f \n", b_angle);
-	printf("         BCA = %f \n", c_angle);
+    printf("         BAC = %lf \n", a_angle);
+	printf("         ABC = %lf \n", b_angle);
+	printf("         BCA = %lf \n", c_angle);
 	printf("\n");
 	printf("Medians:\n");
-    printf("         AA1 = %f \n", aa1);
-	printf("         BB1 = %f \n", bb1);
-	printf("         CC1 = %f \n", cc1);
+    printf("         AA1 = %lf \n", aa1);
+	printf("         BB1 = %lf \n", bb1);
+	printf("         CC1 = %lf \n", cc1);
 	printf("\n");
 	printf("Equations for edges: \n");
 	printf("\n");
@@ -178,14 +178,14 @@ int main(){
 	printf("         AC: ");
 	equationABC(ax, ay, cx, cy);
 	printf("\n");
-	printf("Perimeter: %f \n", p);
+	printf("Perimeter: %lf \n", p);
 	printf("\n");
-	printf("Square:    %f \n", s);
+	printf("Square:    %lf \n", s);
 
 	}
 
 	char command[100];
-	sprintf(command, "./win %f %f %f %f %f %f", ax, ay, bx, by, cx, cy);
+	sprintf(command, "./win %lf %lf %lf %lf %lf %lf", ax, ay, bx, by, cx, cy);
 	system(command);
 	return 0;
 }
