@@ -11,28 +11,34 @@ float speed = 20;
 
 
 float posX = 0.0, posY = 0.0;
+void text()
+{
 
-void points() {
+
+}
+void points()
+{
     glColor3f(0, 1, 0);
     glLineWidth(3.0f);
 
     glBegin(GL_LINE_LOOP);
-        glVertex2f(ax * 10, ay * 10);
-        glVertex2f(bx * 10, by * 10);
-        glVertex2f(cx * 10, cy * 10);
+    glVertex2f(ax * 10, ay * 10);
+    glVertex2f(bx * 10, by * 10);
+    glVertex2f(cx * 10, cy * 10);
     glEnd();
 
     glColor3f(1, 0, 1);
     glPointSize(5.0f);
 
     glBegin(GL_POINTS);
-        glVertex2f(ax * 10, ay * 10);
-        glVertex2f(bx * 10, by * 10);
-        glVertex2f(cx * 10, cy * 10);
+    glVertex2f(ax * 10, ay * 10);
+    glVertex2f(bx * 10, by * 10);
+    glVertex2f(cx * 10, cy * 10);
     glEnd();
 }
 
-void grid() {
+void grid()
+{
     glColor3f(0.8, 0.8, 0.8);
     glLineWidth(1.0f);
     glBegin(GL_LINES);
@@ -45,18 +51,20 @@ void grid() {
     glEnd();
 }
 
-void axes() {
+void axes()
+{
     glColor3f(0.7, 0.7, 0.7);
     glLineWidth(1.0f);
     glBegin(GL_LINES);
-        glVertex2f(-WinW / 2, 0);
-        glVertex2f(WinW / 2, 0);
-        glVertex2f(0, -WinH / 2);
-        glVertex2f(0, WinH / 2);
+    glVertex2f(-WinW / 2, 0);
+    glVertex2f(WinW / 2, 0);
+    glVertex2f(0, -WinH / 2);
+    glVertex2f(0, WinH / 2);
     glEnd();
 }
 
-void display() {
+void display()
+{
     glClear(GL_COLOR_BUFFER_BIT);
     glPushMatrix();
 
@@ -71,34 +79,36 @@ void display() {
     glFlush();
 }
 
-void keyboard(unsigned char key, int x, int y) {
+void keyboard(unsigned char key, int x, int y)
+{
     switch (key) {
-        case '=':
-            scale *= 1.1;
-            break;
-        case '-':
-            scale /= 1.1;
-            break;
-        case 'w':
-            posY -= speed;
-            break;
-        case 's':
-            posY += speed;
-            break;
-        case 'a':
-            posX += speed;
-            break;
-        case 'd':
-            posX -= speed;
-            break;
-        case 27:
-            exit(0);
-            break;
+    case '=':
+        scale *= 1.1;
+        break;
+    case '-':
+        scale /= 1.1;
+        break;
+    case 'w':
+        posY -= speed;
+        break;
+    case 's':
+        posY += speed;
+        break;
+    case 'a':
+        posX += speed;
+        break;
+    case 'd':
+        posX -= speed;
+        break;
+    case 27:
+        exit(0);
+        break;
     }
     glutPostRedisplay();
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     ax = atof(argv[1]);
     ay = atof(argv[2]);
     bx = atof(argv[3]);
