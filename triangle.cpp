@@ -1,38 +1,43 @@
 #include <iostream>
 #include <cmath>
+#include <vector>
 
 using namespace std;
+
+int existError(){
+    cout << "Triangle is not exist!" << "\n";
+    exit(0);
+}
 
 class Triangle{
 private:
         double ax, ay;
         double bx, by;
         double cx, cy;
-        double ab(){
-            return sqrt((pow((bx - ax), 2) + pow((by - ay), 2)));
+        vector<double> lengthSidesTriangle() {
+            double ab = sqrt(pow((bx - ax), 2) + pow((by - ay), 2));
+            double bc = sqrt(pow((cx - bx), 2) + pow((cy - by), 2));
+            double ac = sqrt(pow((cx - ax), 2) + pow((cy - ay), 2));
+
+            return {ab, bc, ac};
         }
-        double bc(){
-            return sqrt((pow((cx - bx), 2) + pow((cy - by), 2)));
-        }
-        double ac(){
-            return sqrt((pow((cx - ax), 2) + pow((cy - ay), 2)));
-        }
+
 public:
         Triangle(double x1, double y1, double x2, double y2, double x3, double y3):
         ax(x1), ay(y1), bx(x2), by(y2), cx(x3), cy(y3) {
             if ((ax == bx & ay == by) | (ax == cx & ay == cy) | (cx == bx & cy == by)){
-                cout << "Triangle is not exist!" << "\n";
-                return ;
+                existError();
             }
         }
-        void sides(){
-            cout << ab() << "\n";
-            cout << bc() << "\n";
-            cout << ac() << "\n";
+        void printInfo() {
+            vector<double> sides = lengthSidesTriangle();
+            cout << "AB: " << sides[0] << "\n";
+            cout << "BC: " << sides[1] << "\n";
+            cout << "AC: " << sides[2] << "\n";
         }
-
-
 };
+
+
 
 int main(){
     double x1, y1, x2, y2, x3, y3;
@@ -46,6 +51,6 @@ int main(){
     cout << "\n";
     Triangle t(x1, y1, x2, y2, x3, y3);
 
-    t.sides();
+    t.printInfo();
     return 0;
 }
