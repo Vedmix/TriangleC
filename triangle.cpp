@@ -14,7 +14,7 @@ private:
         double ax, ay;
         double bx, by;
         double cx, cy;
-        vector<double> lengthSidesTriangle() {
+        vector <double> lengthSidesTriangle() {
 
             double side_ab = sqrt(pow((bx - ax), 2) + pow((by - ay), 2));
             double side_bc = sqrt(pow((cx - bx), 2) + pow((cy - by), 2));
@@ -33,6 +33,17 @@ private:
             return {angle_cab, angle_abc, angle_bca};
         }
 
+        vector <double> mediansTriangle(){
+            vector<double> sides = lengthSidesTriangle();
+
+            double median_aa1 = 0.5 * sqrt(2 * pow(sides[2], 2) + 2 * pow(sides[1], 2) - pow(sides[0], 2));
+            double median_bb1 = 0.5 * sqrt(2 * pow(sides[0], 2) + 2 * pow(sides[1], 2) - pow(sides[2], 2));
+            double median_cc1 = 0.5 * sqrt(2 * pow(sides[0], 2) + 2 * pow(sides[2], 2) - pow(sides[1], 2));
+
+            return {median_aa1, median_bb1, median_cc1};
+
+        }
+
 public:
         Triangle(double x1, double y1, double x2, double y2, double x3, double y3):
         ax(x1), ay(y1), bx(x2), by(y2), cx(x3), cy(y3) {
@@ -42,8 +53,9 @@ public:
         }
         void printInfo() {
 
-            vector<double> sides = lengthSidesTriangle();
-            vector<double> angles = anglesTriangle();
+            vector <double> sides = lengthSidesTriangle();
+            vector <double> angles = anglesTriangle();
+            vector <double> medians = mediansTriangle();
 
             cout << "AB: " << sides[0] << endl;
             cout << "BC: " << sides[1] << endl;
@@ -52,6 +64,10 @@ public:
             cout << "CAB: " << angles[0] << endl;
             cout << "ABC: " << angles[1] << endl;
             cout << "BCA: " << angles[2] << endl;
+
+            cout << "AA1: " << medians[0] << endl;
+            cout << "BB1: " << medians[1] << endl;
+            cout << "CC1: " << medians[2] << endl;
         }
 };
 
